@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="glass-nav">
       <div className="logo text-gradient">
         <Eye size={28} color="#60a5fa" />
-        <span>GON Vision</span>
+        <span>GlauAI</span>
       </div>
 
       <div className="nav-links">
@@ -16,13 +16,13 @@ const Navbar = () => {
           to="/"
           className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
         >
-          Beranda
+          Home
         </Link>
         <Link
           to="/detect"
           className={`nav-link ${location.pathname === '/detect' ? 'active' : ''}`}
         >
-          Deteksi GON
+          Check
         </Link>
       </div>
     </nav>

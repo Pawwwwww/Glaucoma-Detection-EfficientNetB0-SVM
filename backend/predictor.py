@@ -93,17 +93,17 @@ def generate_gradcam(model, tensor, img_rgb, label):
 def get_saran(label: str, confidence: float) -> str:
     if label == "GON+":
         if confidence >= 85:
-            return ("Hasil menunjukkan indikasi kuat Glaucomatous Optic Neuropathy (GON+). "
-                    "Segera konsultasikan dengan dokter spesialis mata untuk pemeriksaan "
-                    "lebih lanjut seperti OCT dan perimetri.")
+            return ("Results show a strong indication of Glaucomatous Optic Neuropathy (GON+). "
+                    "Please consult an ophthalmologist immediately for further examination "
+                    "such as OCT and perimetry.")
         else:
-            return ("Hasil menunjukkan kemungkinan GON+, namun confidence masih moderat. "
-                    "Disarankan untuk melakukan pemeriksaan ulang dengan gambar berkualitas "
-                    "lebih baik dan konsultasi ke dokter mata.")
+            return ("Results show a possible indication of GON+, but confidence is moderate. "
+                    "It is recommended to retake the test with better image quality "
+                    "and consult an eye specialist.")
     else:
         if confidence >= 85:
-            return ("Hasil tidak menunjukkan indikasi GON. Tetap lakukan pemeriksaan "
-                    "mata rutin setiap 1-2 tahun untuk memantau kesehatan retina.")
+            return ("Results show NO indication of GON. Continue with routine "
+                    "eye examinations every 1-2 years to monitor retinal health.")
         else:
-            return ("Hasil menunjukkan kemungkinan tidak ada GON, namun confidence masih "
-                    "moderat. Tetap disarankan konsultasi ke dokter mata untuk konfirmasi.")
+            return ("Results suggest no indication of GON, but confidence is "
+                    "moderate. Consultation with an eye doctor is still recommended for confirmation.")

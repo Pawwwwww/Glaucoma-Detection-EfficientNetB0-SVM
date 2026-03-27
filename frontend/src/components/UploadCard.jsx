@@ -27,9 +27,9 @@ const UploadCard = ({ file, preview, onSelect, onClear }) => {
         <img 
           src={preview} 
           alt="Preview" 
-          style={{ width: '100%', maxHeight: '400px', objectFit: 'contain', background: 'rgba(0,0,0,0.5)', display: 'block' }} 
+          style={{ width: '100%', maxHeight: '250px', objectFit: 'contain', background: 'rgba(0,0,0,0.5)', display: 'block' }} 
         />
-        <div style={{ padding: '1rem', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ padding: '0.75rem 1rem', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <FileImage size={24} color="var(--primary)" />
             <div>
@@ -80,9 +80,9 @@ const UploadCard = ({ file, preview, onSelect, onClear }) => {
           <UploadCloud size={48} color="var(--primary)" />
         </div>
         <div>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Unggah Citra Fundus</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Klik atau seret file ke area ini</p>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>PNG, JPG (Maks. 10MB)</p>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Upload Fundus Image</h3>
+          <p style={{ color: 'var(--text-muted)' }}>Click or drag file to this area</p>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>PNG, JPG (Max. 10MB)</p>
         </div>
       </div>
     </div>

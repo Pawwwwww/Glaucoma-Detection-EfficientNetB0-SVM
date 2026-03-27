@@ -71,8 +71,8 @@ async def predict_image(file: UploadFile = File(...)):
     if qs < 5.0:
         raise HTTPException(
             status_code = 422,
-            detail      = f"Kualitas gambar terlalu rendah (QS: {qs}). "
-                           f"Pastikan gambar tidak blur dan pencahayaan cukup."
+            detail      = f"Image quality is too low (QS: {qs:.1f}). "
+                           f"Ensure the image is not blurry and lighting is sufficient."
         )
 
     # ── 4. Preprocessing ──────────────────────────────────

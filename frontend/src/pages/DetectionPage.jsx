@@ -8,19 +8,29 @@ const DetectionPage = () => {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [errorVisible, setErrorVisible] = useState(false);
   const [result, setResult] = useState(null);
+
+  const showError = (message) => {
+    setError(message);
+    setErrorVisible(true);
+    setTimeout(() => {
+      setErrorVisible(false);
+      setTimeout(() => setError(null), 400); // Wait for exit animation
+    }, 3000);
+  };
 
   const handleFileSelect = (selectedFile) => {
     setError(null);
     setResult(null);
 
     if (selectedFile.size > 10 * 1024 * 1024) {
-      setError("Ukuran file terlalu besar! Maksimal 10MB.");
+      showError("File size is too large! Maximum 10MB.");
       return;
     }
 
     if (!['image/jpeg', 'image/png', 'image/jpg'].includes(selectedFile.type)) {
-      setError("Format file tidak didukung. Harap gunakan JPG atau PNG.");
+      showError("Unsupported file format. Please use JPG or PNG.");
       return;
     }
 
@@ -53,25 +63,25 @@ const DetectionPage = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Terjadi kesalahan pada server");
+        throw new Error(data.detail || "Server error occurred");
       }
 
       setResult(data);
     } catch (err) {
-      setError(err.message);
+      showError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="page-container container fade-in">
-      <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%', marginTop: '2rem' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', textAlign: 'center' }}>
-          Portal <span className="text-gradient">Deteksi</span>
+    <div className="page-container container fade-in" style={{ paddingBottom: '1rem' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%', marginTop: '6.5rem', marginBottom: '1rem' }}>
+        <h1 style={{ fontSize: '2rem', marginBottom: '0.25rem', textAlign: 'center' }}>
+          Detection <span className="text-gradient">Portal</span>
         </h1>
-        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '3rem' }}>
-          Unggah citra fundus retina Anda untuk mendapatkan analisis langsung.
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+          Upload your retinal fundus image for instant analysis.
         </p>
 
         {!result ? (
@@ -84,9 +94,29 @@ const DetectionPage = () => {
             />
 
             {error && (
-              <div className="error-banner fade-in">
-                <AlertCircle size={20} />
-                <span>{error}</span>
+              <div style={{
+                position: 'fixed',
+                top: '1rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 9999,
+                background: 'rgba(239, 68, 68, 0.15)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(239, 68, 68, 0.4)',
+                boxShadow: '0 8px 32px 0 rgba(239, 68, 68, 0.3)',
+                padding: '1rem 2rem',
+                borderRadius: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                color: '#fca5a5',
+                animation: errorVisible 
+                  ? 'slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                  : 'slideUpFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+              }}>
+                <AlertCircle size={24} />
+                <span style={{ fontWeight: 500, letterSpacing: '0.02em' }}>{error}</span>
               </div>
             )}
 
@@ -101,10 +131,10 @@ const DetectionPage = () => {
                   {loading ? (
                     <div className="flex-center" style={{ gap: '0.5rem' }}>
                       <div className="spinner"></div>
-                      <span>Menganalisis Citra...</span>
+                      <span>Analyzing Image...</span>
                     </div>
                   ) : (
-                    "Analisis Citra Sekarang"
+                    "Analyze Image Now"
                   )}
                 </button>
               </div>

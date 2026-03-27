@@ -45,6 +45,14 @@ body {
   border-radius: 20px;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-cyber:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(30, 58, 138, 0.25);
 }
 
 /* Liquid reflection effect for glass panels */
@@ -114,7 +122,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4);
   background: linear-gradient(135deg, #60a5fa, var(--primary));
 }
 
@@ -160,6 +168,7 @@ body {
 
 .page-container {
   padding-top: 6rem;
+  padding-bottom: 4rem; /* Added to prevent cutoff at the bottom */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -226,7 +235,17 @@ body {
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-out both;
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideDownFade {
+  0% { opacity: 0; transform: translate(-50%, -20px); filter: blur(10px); }
+  100% { opacity: 1; transform: translate(-50%, 0); filter: blur(0); }
+}
+
+@keyframes slideUpFadeOut {
+  0% { opacity: 1; transform: translate(-50%, 0); filter: blur(0); }
+  100% { opacity: 0; transform: translate(-50%, -20px); filter: blur(10px); }
 }
 
 /* Error banner */
@@ -240,4 +259,21 @@ body {
   align-items: center;
   gap: 0.75rem;
   color: var(--danger);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
