@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+torch
+torchvision
+timm
+joblib
+numpy
+opencv-python-headless
+albumentations
+scikit-learn
+grad-cam
